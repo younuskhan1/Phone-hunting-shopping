@@ -10,7 +10,7 @@ const byDefaultPhoneShow = async () => {
     }
 }
 
-const loadPhoneData = async () => {
+const loadPhoneDataBySearch = async () => {
     const inputField = document.getElementById("input-field");
     const inputName = inputField.value;
     // console.log(inputName);
@@ -34,8 +34,8 @@ const showingPhones = (phones) => {
         const div = document.createElement("div");
         div.classList = `card bg-base-100 shadow-xl`;
         div.innerHTML = ` 
-            <figure class="px-10 pt-10">
-                <img src="${phone.image}" alt="Shoes" class="rounded-xl" />
+            <figure class="px-2 pt-4">
+                <img class="w-4/5" src="${phone.image}" alt="Shoes" class="rounded-xl" />
             </figure>
             <div class="card-body items-center text-center">
                 <h2 class="card-title">${phone.phone_name}</h2>
