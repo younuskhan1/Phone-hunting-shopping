@@ -1,8 +1,20 @@
+const byDefaultPhoneShow = async () => {
+    const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        showingPhones(data.data);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 const loadPhoneData = async () => {
     const inputField = document.getElementById("input-field");
     const inputName = inputField.value;
     // console.log(inputName);
-    // inputField.value = "";
+    inputField.value = "";
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputName}`;
     try {
         const response = await fetch(url);
@@ -37,3 +49,5 @@ const showingPhones = (phones) => {
         phoneContainer.appendChild(div);
     }
 }
+
+byDefaultPhoneShow();
