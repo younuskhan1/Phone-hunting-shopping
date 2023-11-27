@@ -29,25 +29,31 @@ const showingPhones = (phones) => {
     // console.log(phones)
     const phoneContainer = document.getElementById("phone-container");
     phoneContainer.innerHTML = "";
-    for (let phone of phones) {
-        console.log(phone);
-        const div = document.createElement("div");
-        div.classList = `card bg-base-100 shadow-xl rounded-none`;
-        div.innerHTML = ` 
-            <figure class="px-2 m-3 py-4 bg-[#deeff5] rounded-none">
-                <img class="w-4/5 rounded-3xl" src="${phone.image}" alt="Shoes" class="rounded-xl" />
-            </figure>
-            <div class="card-body items-center text-center">
-                <h2 class="card-title">${phone.phone_name}</h2>
-                <p class="break-all">${phone.slug}</p>
-                <p>${phone.brand}</p>
-                <div class="card-actions">
-                    <button class="btn btn-secondary">Show Details</button>
+    const noPhoneFound = document.getElementById("no-phone-found");
+    if (phones.length === 0) {
+        noPhoneFound.classList.remove("hidden");
+    } else {
+        for (let phone of phones) {
+            console.log(phone);
+            const div = document.createElement("div");
+            div.classList = `card bg-base-100 shadow-xl rounded-none`;
+            div.innerHTML = ` 
+                <figure class="px-2 m-3 py-4 bg-[#deeff5] rounded-none">
+                    <img class="w-4/5 rounded-3xl" src="${phone.image}" alt="Shoes" class="rounded-xl" />
+                </figure>
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title">${phone.phone_name}</h2>
+                    <p class="break-all">${phone.slug}</p>
+                    <p>${phone.brand}</p>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary">Show Details</button>
+                    </div>
                 </div>
-            </div>
-        `;
-        phoneContainer.appendChild(div);
+            `;
+            phoneContainer.appendChild(div);
+        }
     }
+
 }
 
 byDefaultPhoneShow();
