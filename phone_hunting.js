@@ -10,17 +10,18 @@ const byDefaultPhoneShow = async () => {
     }
 }
 
-const loadPhoneDataBySearch = async () => {
+const loadPhoneDataBySearch = async (dataRange) => {
+    console.log(dataRange);
     contentIsLoading(true);
     const inputField = document.getElementById("input-field");
     const inputName = inputField.value;
     // console.log(inputName);
-    inputField.value = "";
+    // inputField.value = "";
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputName}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
-        showingPhones(data.data);
+        showingPhones(data.data, dataRange);
         // console.log(dataLimit);
     }
     catch (error) {
@@ -28,8 +29,8 @@ const loadPhoneDataBySearch = async () => {
     }
 }
 
-const showingPhones = (phones) => {
-    // console.log(phones)
+const showingPhones = (phones, dataRange) => {
+    // console.log(dataRange);
 
     const phoneContainer = document.getElementById("phone-container");
     phoneContainer.innerHTML = "";
@@ -39,14 +40,21 @@ const showingPhones = (phones) => {
     if (phones.length === 0) {
         noPhoneFound.classList.remove("hidden");
     } else {
-        if (phones.length > 8) {
-            phones = phones.slice(0, 8);
-            showAllButton.classList.remove("hidden");
-            for (let phone of phones) {
-                // console.log(phone);
-                const div = document.createElement("div");
-                div.classList = `card bg-base-100 shadow-xl rounded-none`;
-                div.innerHTML = ` 
+        noPhoneFound.classList.add("hidden");
+    }
+
+    if (dataRange && phones.length > 8) {
+        phones = phones.slice(0, 8)
+        showAllButton.classList.remove("hidden");
+    } else {
+        showAllButton.classList.add("hidden");
+    }
+
+    for (let phone of phones) {
+        // console.log(phone);
+        const div = document.createElement("div");
+        div.classList = `card bg-base-100 shadow-xl rounded-none`;
+        div.innerHTML = ` 
                     <figure class="px-2 m-3 py-4 bg-[#deeff5] rounded-none">
                         <img class="w-4/5 rounded-3xl" src="${phone.image}" alt="Shoes" class="rounded-xl" />
                     </figure>
@@ -59,13 +67,13 @@ const showingPhones = (phones) => {
                         </div>
                     </div>
                 `;
-                phoneContainer.appendChild(div);
-                noPhoneFound.classList.add("hidden");
-            }
-        }
+        phoneContainer.appendChild(div);
+
     }
     contentIsLoading(false);
 }
+
+
 
 const loadingShowDetailsData = async (phoneId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
@@ -103,7 +111,7 @@ const displayShowDetails = (phone) => {
 }
 
 const showAllButtonHandler = () => {
-    loadPhoneDataBySearch();
+    loadPhoneDataBySearch(false);
 }
 
 const contentIsLoading = (isLoading) => {
