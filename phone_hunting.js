@@ -11,6 +11,7 @@ const byDefaultPhoneShow = async () => {
 }
 
 const loadPhoneDataBySearch = async () => {
+    contentIsLoading(true);
     const inputField = document.getElementById("input-field");
     const inputName = inputField.value;
     // console.log(inputName);
@@ -25,11 +26,15 @@ const loadPhoneDataBySearch = async () => {
         console.log(error);
     }
 }
+
+
+
 const showingPhones = (phones) => {
     // console.log(phones)
     const phoneContainer = document.getElementById("phone-container");
     phoneContainer.innerHTML = "";
     const noPhoneFound = document.getElementById("no-phone-found");
+
     if (phones.length === 0) {
         noPhoneFound.classList.remove("hidden");
     } else {
@@ -51,9 +56,20 @@ const showingPhones = (phones) => {
                 </div>
             `;
             phoneContainer.appendChild(div);
+            noPhoneFound.classList.add("hidden");
         }
-    }
 
+    }
+    contentIsLoading(false);
+}
+
+const contentIsLoading = (isLoading) => {
+    const spinnerContainer = document.getElementById("spinner");
+    if (isLoading) {
+        spinnerContainer.classList.remove("hidden");
+    } else {
+        spinnerContainer.classList.add("hidden");
+    }
 }
 
 byDefaultPhoneShow();
