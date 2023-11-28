@@ -54,7 +54,7 @@ const showingPhones = (phones, dataRange) => {
         // phones is a parameter here. 
         // a non variable thing which can be reassigned like a variable declared by let. 
 
-        phones = phones.slice(0, 8);
+        phones = phones.slice(0, 8)
         showAllButton.classList.remove("hidden");
     } else {
         showAllButton.classList.add("hidden");
@@ -65,20 +65,19 @@ const showingPhones = (phones, dataRange) => {
         const div = document.createElement("div");
         div.classList = `card bg-base-100 shadow-xl rounded-none`;
         div.innerHTML = ` 
-                    <figure class="px-2 m-3 py-4 bg-[#deeff5] rounded-none">
-                        <img class="w-4/5 rounded-3xl" src="${phone.image}" alt="Shoes" class="rounded-xl" />
-                    </figure>
-                    <div class="card-body items-center text-center">
-                        <h2 class="card-title">${phone.phone_name}</h2>
-                        <p class="break-all">${phone.slug}</p>
-                        <p>${phone.brand}</p>
-                        <div class="card-actions">
-                            <button class="btn btn-secondary" onClick="loadingShowDetailsData('${phone.slug}')">Show Details</button>
-                        </div>
-                    </div>
-                `;
+            <figure class="px-2 m-3 py-4 bg-[#deeff5] rounded-none">
+                <img class="w-4/5 rounded-3xl" src="${phone.image}" alt="Shoes" class="rounded-xl" />
+            </figure>
+            <div class="card-body items-center text-center">
+                <h2 class="card-title">${phone.phone_name}</h2>
+                <p class="break-all">${phone.slug}</p>
+                <p>${phone.brand}</p>
+                <div class="card-actions">
+                    <button class="btn btn-secondary" onClick="loadingShowDetailsData('${phone.slug}')">Show Details</button>
+                </div>
+            </div>
+        `;
         phoneContainer.appendChild(div);
-
     }
     contentIsLoading(false);
 }
