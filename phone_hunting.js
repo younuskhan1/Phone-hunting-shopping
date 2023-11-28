@@ -54,7 +54,7 @@ const showingPhones = (phones, dataRange) => {
         // phones is a parameter here. 
         // a non variable thing which can be reassigned like a variable declared by let. 
 
-        phones = phones.slice(0, 8)
+        phones = phones.slice(0, 8);
         showAllButton.classList.remove("hidden");
     } else {
         showAllButton.classList.add("hidden");
